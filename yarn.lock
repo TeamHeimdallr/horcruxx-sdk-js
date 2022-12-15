@@ -432,9 +432,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@horcurxx/horcurxx-js@workspace:.":
+"@horcruxx/horcruxx-js@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@horcurxx/horcurxx-js@workspace:."
+  resolution: "@horcruxx/horcruxx-js@workspace:."
   dependencies:
     "@types/jest": ^29.2.4
     "@typescript-eslint/eslint-plugin": ^5.46.0
