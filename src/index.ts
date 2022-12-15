@@ -1,4 +1,2 @@
-export { Uuid } from './helpers/uuid';
-import uuid from './helpers/uuid';
-
-export default uuid;
+console.log('Hello, World!');
+console.log('This is horcruxx sdk js v0.1.0!');

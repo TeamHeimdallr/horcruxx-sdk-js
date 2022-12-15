@@ -432,6 +432,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@horcurxx/horcurxx-js@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@horcurxx/horcurxx-js@workspace:."
+  dependencies:
+    "@types/jest": ^29.2.4
+    "@typescript-eslint/eslint-plugin": ^5.46.0
+    "@typescript-eslint/parser": ^5.46.0
+    eslint: ^8.29.0
+    eslint-config-prettier: ^8.5.0
+    eslint-plugin-import: ^2.26.0
+    eslint-plugin-jest: ^27.1.6
+    eslint-plugin-simple-import-sort: ^7.0.0
+    eslint-plugin-unused-imports: ^2.0.0
+    jest: ^29.3.1
+    prettier: ^2.8.1
+    ts-jest: ^29.0.3
+    typescript: ^4.9.4
+  languageName: unknown
+  linkType: soft
+
 "@humanwhocodes/config-array@npm:^0.11.6":
   version: 0.11.8
   resolution: "@humanwhocodes/config-array@npm:0.11.8"
@@ -2596,26 +2616,6 @@ __metadata:
   checksum: b9ad53d53be4af90ce5d1c38331e712522417d017d5ef1ebd0507e07c2fbad8686fffb8e12ddecd4c39ca9b9b47431afbb975b8abf7f3c3b82c98e9aad052792
   languageName: node
   linkType: hard
-
-"horcurxx-sdk-js@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "horcurxx-sdk-js@workspace:."
-  dependencies:
-    "@types/jest": ^29.2.4
-    "@typescript-eslint/eslint-plugin": ^5.46.0
-    "@typescript-eslint/parser": ^5.46.0
-    eslint: ^8.29.0
-    eslint-config-prettier: ^8.5.0
-    eslint-plugin-import: ^2.26.0
-    eslint-plugin-jest: ^27.1.6
-    eslint-plugin-simple-import-sort: ^7.0.0
-    eslint-plugin-unused-imports: ^2.0.0
-    jest: ^29.3.1
-    prettier: ^2.8.1
-    ts-jest: ^29.0.3
-    typescript: ^4.9.4
-  languageName: unknown
-  linkType: soft
 
 "html-escaper@npm:^2.0.0":
   version: 2.0.2

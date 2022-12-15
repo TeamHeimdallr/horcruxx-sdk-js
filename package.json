@@ -1,9 +1,12 @@
 {
-  "name": "horcurxx-sdk-js",
-  "version": "0.1.0",
+  "name": "@horcurxx/horcurxx-js",
+  "version": "0.0.1",
   "description": "",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
   "scripts": {
     "build": "tsc",
     "check:lint": "eslint src --ext ts --ext tsx --fix",
@@ -13,7 +16,7 @@
     "test:silent": "jest --config jest.config.js --watchAll=false --maxWorkers=1",
     "test:target": "jest --config jest.config.js --testPathPattern --maxWorkers=1 =",
     "test:coverage": "jest --config jest.config.js  --maxWorkers=1 --coverage",
-    "prepare": "npm run build",
+    "prepare": "rm -rf lib && npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
@@ -39,14 +42,13 @@
     "url": "git+https://github.com/horcurxx/horcurxx-sdk-js.git"
   },
   "keywords": [
-    "boilerplate",
     "typescript"
   ],
-  "author": "",
+  "author": "Imchaemin",
+  "contributors": [
+    "Imchaemin"
+  ],
   "license": "MIT",
   "homepage": "https://github.com/horcurxx/horcurxx-sdk-js.git#readme",
-  "files": [
-    "lib/**/*"
-  ],
   "packageManager": "yarn@3.3.0"
 }
