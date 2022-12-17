@@ -13,7 +13,7 @@ export interface SBTCollectionMetadata {
   totalSupply: number;
 }
 
-export const getSBTCollectionMetadata = (params: SBTCollectionMetadataParams): SBTCollectionMetadata => {
+export const getSBTCollectionMetadata = async (params: SBTCollectionMetadataParams): Promise<SBTCollectionMetadata> => {
   return {
     tokenAddress: '0xsbtcdef22feed20eddacbb2587640e45491b757f',
     originalNftAddress: '0x79fcdef22feed20eddacbb2587640e45491b757f',

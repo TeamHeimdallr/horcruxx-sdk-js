@@ -11,7 +11,7 @@ export interface CollectStats {
   numSbtOwners: number;
 }
 
-export const getCollectStats = (params: CollectStatsParams): CollectStats => {
+export const getCollectStats = async (params: CollectStatsParams): Promise<CollectStats> => {
   return {
     tokenAddress: '0xsbtcdef22feed20eddacbb2587640e45491b757f',
     originalNftAddress: '0x79fcdef22feed20eddacbb2587640e45491b757f',

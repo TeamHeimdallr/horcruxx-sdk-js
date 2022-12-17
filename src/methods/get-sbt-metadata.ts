@@ -18,7 +18,7 @@ export interface SBTMetadata {
   minterAddress: string; // sbt minter address
 }
 
-export const getSBTMetadata = (params: SBTMetadataParams): SBTMetadata => {
+export const getSBTMetadata = async (params: SBTMetadataParams): Promise<SBTMetadata> => {
   return {
     tokenAddress: '0xsbtcdef22feed20eddacbb2587640e45491b757f',
     originalNftAddress: '0x79fcdef22feed20eddacbb2587640e45491b757f',

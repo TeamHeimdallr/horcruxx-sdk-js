@@ -6,7 +6,7 @@ export interface BurnerAddress {
   burnerAddress: string;
 }
 
-export const getCollectStats = (params: BurnerAddressParams): BurnerAddress => {
+export const getCollectStats = async (params: BurnerAddressParams): Promise<BurnerAddress> => {
   return {
     burnerAddress: '0x000000000000000000000000000000000000dead',
   };

@@ -14,7 +14,7 @@ export interface SBTAttributes {
   attributes: SBTAttribute[];
 }
 
-export const getSBTAttributes = (params: SBTAttributesParams): SBTAttributes => {
+export const getSBTAttributes = async (params: SBTAttributesParams): Promise<SBTAttributes> => {
   return {
     tokenAddress: '0xsbtcdef22feed20eddacbb2587640e45491b757f',
     tokenId: '1',

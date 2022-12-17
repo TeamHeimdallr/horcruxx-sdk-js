@@ -7,7 +7,7 @@ export interface SBTAddressByNFT {
   originalNftAddress: string;
 }
 
-export const getSBTAttributes = (params: SBTAddressByNFTParams): SBTAddressByNFT => {
+export const getSBTAttributes = async (params: SBTAddressByNFTParams): Promise<SBTAddressByNFT> => {
   return {
     tokenAddress: '0xsbtcdef22feed20eddacbb2587640e45491b757f',
     originalNftAddress: '0xsbtcdef22feed20eddacbb2587640e45491b757f',

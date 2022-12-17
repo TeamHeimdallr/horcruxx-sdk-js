@@ -7,7 +7,7 @@ export interface ConvertFromNFT {
   success: boolean;
 }
 
-export const getCollectStats = (params: ConvertFromNFTParams): ConvertFromNFT => {
+export const getCollectStats = async (params: ConvertFromNFTParams): Promise<ConvertFromNFT> => {
   return {
     success: true,
   };
