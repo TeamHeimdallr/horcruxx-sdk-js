@@ -1,8 +1,8 @@
 {
   "extends": "./tsconfig.extend.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
+    "target": "esnext",
+    "module": "esnext",
     "lib": ["dom", "esnext"],
     "outDir": "./dist/src",
     "strict": true,
@@ -11,6 +11,7 @@
     "resolveJsonModule": true,
     "suppressImplicitAnyIndexErrors": true,
     "noImplicitAny": false,
+    "noImplicitThis": false,
     "strictFunctionTypes": false,
     "strictNullChecks": false,
     "strictPropertyInitialization": false,
@@ -19,5 +20,5 @@
     "skipLibCheck": true
   },
   "include": ["src/**/*"],
-  "exclude": ["dist/**/*", "node_modules/**/*"]
+  "exclude": ["dist", "node_modules"]
 }
