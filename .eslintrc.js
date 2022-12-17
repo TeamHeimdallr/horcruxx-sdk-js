@@ -8,10 +8,7 @@ module.exports = {
       jsx: true,
     },
   },
-  extends: [
-    'prettier',
-    'eslint:recommended',
-  ],
+  extends: ['prettier', 'eslint:recommended'],
   settings: {
     react: {
       version: 'detect',
@@ -46,7 +43,7 @@ module.exports = {
       extends: [
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
-        'plugin:jest/recommended'
+        'plugin:jest/recommended',
       ],
     },
     {
