@@ -1,1 +1,22 @@
-export * as NFT from './nft';
+export {
+  approve,
+  ApprovedAddress,
+  ApprovedForAll,
+  ApproveParams,
+  Balance,
+  balanceOf,
+  BalanceOfParams,
+  getApproved,
+  GetApprovedParams,
+  isApprovedForAll,
+  IsApprovedForAllParams,
+  Owner,
+  ownerOf,
+  OwnerOfParams,
+  safeTransferFrom,
+  SafeTransferFromParmas,
+  setApprovalForAll,
+  SetApprovelForAllParams,
+  transferFrom,
+  TransferFromParmas,
+} from './nft';

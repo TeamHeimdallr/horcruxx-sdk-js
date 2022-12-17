@@ -7,6 +7,7 @@ import typescript from 'rollup-plugin-typescript2';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { terser } from 'rollup-plugin-terser';
 import sourcemaps from 'rollup-plugin-sourcemaps';
+import dts from 'rollup-plugin-dts';
 import path from 'path';
 
 import pkg from './package.json';
@@ -14,9 +15,7 @@ import pkg from './package.json';
 const extensions = ['.js', '.ts'];
 
 const plugins = [
-  alias({
-    entries: [{ find: '~', replacement: path.resolve(__dirname, 'src') }],
-  }),
+  alias({ entries: [{ find: '~', replacement: path.resolve(__dirname, 'src') }] }),
   commonjs(),
   resolve({ extensions, preferBuiltins: true }),
   peerDepsExternal(),
@@ -28,11 +27,8 @@ const plugins = [
     tsconfig: './tsconfig.json',
   }),
   babel({
-    // babelHelpers: 'runtime',
     babelHelpers: 'bundled',
     exclude: 'node_modules/**',
-    // extensions,
-    // skipPreflightCheck: true,
   }),
   sourcemaps(),
   terser(),
@@ -45,7 +41,6 @@ const treeshake = {
 const external = ['web3'];
 
 export default [
-  // esm 번들링
   {
     input: 'src/index.ts',
     output: [
@@ -56,12 +51,10 @@ export default [
         sourcemap: true,
       },
     ],
-    // external: [/@babel\/runtime/],
     external,
     treeshake,
     plugins,
   },
-  // cjs 번들링
   {
     input: 'src/index.ts',
     output: [
@@ -72,9 +65,13 @@ export default [
         sourcemap: true,
       },
     ],
-    // external: [/@babel\/runtime/],
     external,
     treeshake,
     plugins,
+  },
+  {
+    input: 'src/index.ts',
+    output: [{ file: 'dist/index.d.ts', format: 'esm' }],
+    plugins: [dts.default(), alias({ entries: [{ find: '~', replacement: path.resolve(__dirname, 'src') }] })],
   },
 ];

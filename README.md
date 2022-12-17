@@ -1,1 +1,1 @@
-HORCRUXX-JS
+horcruxx-sdk-js
