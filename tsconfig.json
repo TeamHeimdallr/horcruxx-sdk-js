@@ -8,6 +8,7 @@
     "strict": true,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "Node",
+    "resolveJsonModule": true,
     "suppressImplicitAnyIndexErrors": true,
     "noImplicitAny": false,
     "strictFunctionTypes": true,
