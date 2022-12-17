@@ -3,7 +3,7 @@ import { AbiItem } from 'web3-utils';
 import ERC721ABI from '~/abi/erc721.json';
 import { web3 } from '~/config';
 
-interface SafeTransferFromParmas {
+export interface SafeTransferFromParmas {
   from: string;
   to: string;
   collectionAddress: string;
@@ -22,7 +22,7 @@ export const safeTransferFrom = async ({
   await contract.methods.safeTransferFrom(from, to, tokenId, data).call();
 };
 
-interface TransferFromParmas {
+export interface TransferFromParmas {
   from: string;
   to: string;
   collectionAddress: string;

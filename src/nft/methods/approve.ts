@@ -3,7 +3,7 @@ import { AbiItem } from 'web3-utils';
 import ERC721ABI from '~/abi/erc721.json';
 import { web3 } from '~/config';
 
-interface ApproveParams {
+export interface ApproveParams {
   to: string;
   tokenId: string;
   collectionAddress: string;
@@ -14,7 +14,7 @@ export const approve = async ({ to, collectionAddress, tokenId }: ApproveParams)
   await contract.methods.approve(to, tokenId).call();
 };
 
-interface SetApprovelForAllParams {
+export interface SetApprovelForAllParams {
   operator: string;
   approved?: boolean;
   collectionAddress: string;
@@ -29,29 +29,31 @@ export const setApprovalForAll = async ({
   await contract.methods.setApprovalForAll(operator, approved).call();
 };
 
-interface GetApprovedParams {
+export interface GetApprovedParams {
   tokenId: string;
   collectionAddress: string;
 }
-export const getApproved = async ({ tokenId, collectionAddress }: GetApprovedParams): Promise<string> => {
+export type ApprovedAddress = string;
+export const getApproved = async ({ tokenId, collectionAddress }: GetApprovedParams): Promise<ApprovedAddress> => {
   const contract = new web3.eth.Contract(ERC721ABI as AbiItem[], collectionAddress);
 
-  const res = (await contract.methods.getApproved(tokenId).call()) as string;
+  const res = (await contract.methods.getApproved(tokenId).call()) as ApprovedAddress;
   return res;
 };
 
-interface IsApprovedForAllParams {
+export interface IsApprovedForAllParams {
   owner: string;
   operator: string;
   collectionAddress: string;
 }
+export type ApprovedForAll = boolean;
 export const isApprovedForAll = async ({
   owner,
   operator,
   collectionAddress,
-}: IsApprovedForAllParams): Promise<boolean> => {
+}: IsApprovedForAllParams): Promise<ApprovedForAll> => {
   const contract = new web3.eth.Contract(ERC721ABI as AbiItem[], collectionAddress);
 
-  const res = (await contract.methods.isApprovedForAll(owner, operator).call()) as boolean;
+  const res = (await contract.methods.isApprovedForAll(owner, operator).call()) as ApprovedForAll;
   return res;
 };

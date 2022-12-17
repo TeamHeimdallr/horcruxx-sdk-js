@@ -8,9 +8,11 @@ export interface OwnerOfParams {
   collectionAddress: string;
 }
 
-export const ownerOf = async ({ collectionAddress, tokenId }: OwnerOfParams): Promise<string> => {
+export type Owner = string;
+
+export const ownerOf = async ({ collectionAddress, tokenId }: OwnerOfParams): Promise<Owner> => {
   const contract = new web3.eth.Contract(ERC721ABI as AbiItem[], collectionAddress);
 
-  const owner = (await contract.methods.ownerOf(tokenId).call()) as string;
+  const owner = (await contract.methods.ownerOf(tokenId).call()) as Owner;
   return owner;
 };
