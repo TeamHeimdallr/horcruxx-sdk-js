@@ -1,4 +1,4 @@
-import { CONTRACT_TYPE } from '~/types';
+import { CONTRACT_TYPE } from '~/sbt/types';
 
 export interface SBTMetadataParams {
   address: string; // The address of the SBT contract

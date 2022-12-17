@@ -19,7 +19,7 @@
     "test": "jest --config jest.config.js --maxWorkers=1",
     "test:silent": "jest --config jest.config.js --watchAll=false --maxWorkers=1",
     "test:target": "jest --config jest.config.js --testPathPattern --maxWorkers=1 =",
-    "test:coverage": "jest --config jest.config.js  --maxWorkers=1 --coverage"
+    "test:coverage": "jest --config jest.config.js --maxWorkers=1 --coverage"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
@@ -47,6 +47,8 @@
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.34.1",
     "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.1.1",
     "typescript": "^4.9.4"
   },
   "repository": "https://github.com/horcruxx-org/horcruxx-sdk-js.git",
@@ -62,5 +64,8 @@
     "Imchaemin"
   ],
   "license": "MIT",
-  "packageManager": "yarn@3.3.0"
+  "packageManager": "yarn@3.3.0",
+  "dependencies": {
+    "web3": "^1.8.1"
+  }
 }
