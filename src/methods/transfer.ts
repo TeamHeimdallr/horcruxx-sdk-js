@@ -1,7 +1,7 @@
 import { Token } from '~/types';
+import { getAccount } from '~/utils/account';
 import { getContract, signAndSendTx } from '~/utils/contract';
 import { verfiyAccount } from '~/utils/errors';
-import { getAccount } from '~/utils/account';
 
 export interface SafeTransferFromParmas extends Token {
   from: string;

@@ -1,7 +1,7 @@
 import { Token } from '~/types';
+import { getAccount } from '~/utils/account';
 import { getContract, signAndSendTx } from '~/utils/contract';
 import { verfiyAccount } from '~/utils/errors';
-import { getAccount } from '~/utils/account';
 
 export const getApproved = async ({ address, tokenId }: Token): Promise<string> => {
   const contract = getContract(address);

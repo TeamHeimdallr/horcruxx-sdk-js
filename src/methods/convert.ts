@@ -1,7 +1,7 @@
-import { signAndSendTx, getContract } from '~/utils/contract';
-import { verfiyAccount } from '~/utils/errors';
-import { getAccount } from '~/utils/account';
 import { web3 } from '~/config';
+import { getAccount } from '~/utils/account';
+import { getContract, signAndSendTx } from '~/utils/contract';
+import { verfiyAccount } from '~/utils/errors';
 
 export interface ConvertFromNFTParams {
   nftAddress: string;
