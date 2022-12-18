@@ -1,6 +1,5 @@
 import { HORCRUXX_BURNER_ADDRESS } from '~/config';
 import { Token } from '~/types';
-import { ipfs } from '~/utils/fetch-ipfs';
 
 import { totalSupply } from './enumerable';
 import { name, originalNFTAddress, owner, ownerOf, symbol, tokenUri } from './metadata';
@@ -13,7 +12,7 @@ export interface Metadata {
   name: string;
   symbol: string;
   tokenUri: string; // token ifps uri
-  metadata: string; // json string
+  metadataUri: string; // json string
 }
 /**
  *
@@ -29,7 +28,6 @@ export const getMetadata = async ({ address, tokenId }: Token): Promise<Metadata
     tokenUri({ address, tokenId }),
   ]);
   const metadataUri = _tokenUri.split('://')[1] as string;
-  const { data: ipfsData } = await ipfs.get<string>(`/${metadataUri}`);
 
   return {
     address,
@@ -39,7 +37,7 @@ export const getMetadata = async ({ address, tokenId }: Token): Promise<Metadata
     name: _name,
     symbol: _symbol,
     tokenUri: _tokenUri,
-    metadata: JSON.stringify(ipfsData),
+    metadataUri: `https://ipfs.io/ipfs/${metadataUri}`,
   };
 };
 
@@ -66,24 +64,6 @@ export const getCollectionMetadata = async ({ address }: Pick<Token, 'address'>)
     symbol: _symbol,
     owner: _owner,
     totalSupply: _totalSupply,
-  };
-};
-
-export interface TokenAttributes {
-  address: string;
-  tokenId: string;
-  attributes: { [key: string]: unknown }[];
-}
-export const getTokenAttributes = async ({ address, tokenId }: Token): Promise<TokenAttributes> => {
-  const _tokenUri = await tokenUri({ address, tokenId });
-  const metadataUri = _tokenUri.split('://')[1] as string;
-
-  const { data: ipfsData } = await ipfs.get<string>(`/${metadataUri}`);
-
-  return {
-    address,
-    tokenId,
-    attributes: JSON.parse(ipfsData),
   };
 };
 
