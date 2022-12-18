@@ -1,35 +1,29 @@
-import { AbiItem } from 'web3-utils';
+import { Token } from '~/types';
+import { getContract } from '~/utils/contract';
 
-import ERC721ABI_SBT from '~/abi/erc721-sbt.json';
-import { web3 } from '~/config';
-
-export interface SafeTransferFromParmas {
+export interface SafeTransferFromParmas extends Token {
   from: string;
   to: string;
-  collectionAddress: string;
-  tokenId: string;
   data?: string; // HEX string
 }
-export const safeTransferFrom = async ({
-  from,
-  to,
-  tokenId,
-  collectionAddress,
-  data,
-}: SafeTransferFromParmas): Promise<void> => {
-  const contract = new web3.eth.Contract(ERC721ABI_SBT as AbiItem[], collectionAddress);
+export const safeTransferFrom = async ({ from, to, address, tokenId, data }: SafeTransferFromParmas): Promise<void> => {
+  const contract = getContract(address);
 
   await contract.methods.safeTransferFrom(from, to, tokenId, data).call();
 };
 
-export interface TransferFromParmas {
+export interface TransferFromParmas extends Token {
   from: string;
   to: string;
-  collectionAddress: string;
-  tokenId: string;
 }
-export const transferFrom = async ({ from, to, tokenId, collectionAddress }: TransferFromParmas): Promise<void> => {
-  const contract = new web3.eth.Contract(ERC721ABI_SBT as AbiItem[], collectionAddress);
+export const transferFrom = async ({ from, to, address, tokenId }: TransferFromParmas): Promise<void> => {
+  const contract = getContract(address);
 
   await contract.methods.transferFrom(from, to, tokenId).call();
+};
+
+export const transferOwnership = async ({ address }: Pick<Token, 'address'>): Promise<void> => {
+  const contract = getContract(address);
+
+  await contract.methods.transferOwnership(address).call();
 };

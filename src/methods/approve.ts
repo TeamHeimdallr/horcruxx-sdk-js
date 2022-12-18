@@ -1,29 +1,40 @@
-import { SBTContract } from '~/config';
+import { Token } from '~/types';
+import { getContract } from '~/utils/contract';
 
-export const getApproved = async (tokenId: string): Promise<string> => {
-  const res = (await SBTContract.methods.getApproved(tokenId).call()) as string;
+export const getApproved = async ({ address, tokenId }: Token): Promise<string> => {
+  const contract = getContract(address);
+
+  const res = (await contract.methods.getApproved(tokenId).call()) as string;
   return res;
 };
 
-export interface ApprovedForAllParams {
+export interface ApprovedForAllParams extends Pick<Token, 'address'> {
   owner: string;
   operator: string;
 }
-export const isApprovedForAll = async ({ owner, operator }: ApprovedForAllParams): Promise<boolean> => {
-  const res = (await SBTContract.methods.isApprovedForAll(owner, operator).call()) as boolean;
+export const isApprovedForAll = async ({ owner, operator, address }: ApprovedForAllParams): Promise<boolean> => {
+  const contract = getContract(address);
+
+  const res = (await contract.methods.isApprovedForAll(owner, operator).call()) as boolean;
   return res;
 };
-export interface ApproveParams {
+
+export interface ApproveParams extends Pick<Token, 'address'> {
   to: string;
   tokenId: string;
 }
-export const approve = async ({ to, tokenId }: ApproveParams): Promise<void> => {
-  await SBTContract.methods.approve(to, tokenId).call();
+export const approve = async ({ to, tokenId, address }: ApproveParams): Promise<void> => {
+  const contract = getContract(address);
+
+  await contract.methods.approve(to, tokenId).call();
 };
-export interface SetApprovalForAllParams {
+
+export interface SetApprovalForAllParams extends Pick<Token, 'address'> {
   operator: string;
   approved?: boolean;
 }
-export const setApprovalForAll = async ({ operator, approved }: SetApprovalForAllParams): Promise<void> => {
-  await SBTContract.methods.setApprovalForAll(operator, approved).call();
+export const setApprovalForAll = async ({ operator, approved, address }: SetApprovalForAllParams): Promise<void> => {
+  const contract = getContract(address);
+
+  await contract.methods.setApprovalForAll(operator, approved).call();
 };
