@@ -1,6 +1,6 @@
 {
   "name": "@horcruxx-org/horcruxx-sdk-js",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "",
   "scripts": {
     "build": "rm -rf dist && yarn run build:rollup",
@@ -16,9 +16,9 @@
   },
   "exports": {
     ".": {
-      "import": "./index.esm.js",
-      "require": "./index.cjs.js",
-      "types": "./index.d.ts"
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "files": [

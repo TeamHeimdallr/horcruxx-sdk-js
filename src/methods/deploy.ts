@@ -28,7 +28,6 @@ export const deploySbt = async ({ address, name, symbol }: DeploySbtParams): Pro
     .encodeABI();
 
   const deployedAddress = await signAndSendTx({ data: tx, account: getAccount() }).then(function (receipt) {
-    console.log(receipt.contractAddress);
     setOriginalNFTAddress({ address: receipt.contractAddress, nftAddress: address });
     return receipt.contractAddress;
   });
