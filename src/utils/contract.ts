@@ -1,13 +1,14 @@
 import { AbiItem } from 'web3-utils';
-import { Account } from 'web3-core';
+import { Account, TransactionReceipt } from 'web3-core';
 
 import ERC721ABI_SBT from '~/abi/erc721-sbt.json';
 import { web3 } from '~/config';
 
 export interface SignAndSendTxParams {
-  to: string;
+  to?: string;
   data: string;
   account: Account;
+  gas?: number;
 }
 
 export const getContract = (address?: string) =>
@@ -15,16 +16,21 @@ export const getContract = (address?: string) =>
     ? new web3.eth.Contract(ERC721ABI_SBT as AbiItem[], address)
     : new web3.eth.Contract(ERC721ABI_SBT as AbiItem[]);
 
-export const signAndSendTx = async ({ to, data, account }: SignAndSendTxParams): Promise<void> => {
+export const signAndSendTx = async ({ to, data, account, gas }: SignAndSendTxParams): Promise<TransactionReceipt> => {
   const block = await web3.eth.getBlock('latest');
-  const gasLimit = Math.round(block.gasLimit / Math.max(block.transactions.length, 1));
+  const gasLimit = gas ? gas : Math.round(block.gasLimit / Math.max(block.transactions.length, 1));
 
-  const tx = {
-    gas: gasLimit,
-    to,
-    data,
-  };
+  const tx = to
+    ? {
+        gas: gasLimit,
+        to,
+        data,
+      }
+    : {
+        gas: gasLimit,
+        data,
+      };
 
   const signedTx = await web3.eth.accounts.signTransaction(tx, account.privateKey);
-  web3.eth.sendSignedTransaction(signedTx.rawTransaction).on('error', console.error);
+  return web3.eth.sendSignedTransaction(signedTx.rawTransaction).on('error', console.error);
 };

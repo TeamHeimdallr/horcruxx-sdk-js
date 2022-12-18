@@ -1,5 +1,11 @@
 import { Token } from '~/types';
-import { getContract } from '~/utils/contract';
+import { getContract, signAndSendTx } from '~/utils/contract';
+import { verfiyAccount } from '~/utils/errors';
+import { getAccount } from '~/utils/account';
+
+export interface SetOriginalNFTAddressParams extends Pick<Token, 'address'> {
+  nftAddress: string;
+}
 
 export const name = async ({ address }: Pick<Token, 'address'>): Promise<string> => {
   const contract = getContract(address);
@@ -29,10 +35,13 @@ export const originalNFTAddress = async ({ address }: Pick<Token, 'address'>): P
   return nftAddress;
 };
 
-export const setOriginalNFTAddress = async ({ address }: Pick<Token, 'address'>): Promise<void> => {
+export const setOriginalNFTAddress = async ({ address, nftAddress }: SetOriginalNFTAddressParams): Promise<void> => {
   const contract = getContract(address);
 
-  await contract.methods.setOriginalNFTAddress(address).call();
+  const encoded = contract.methods.setOriginalNFTAddress(nftAddress).encodeABI();
+
+  verfiyAccount();
+  await signAndSendTx({ to: address, data: encoded, account: getAccount() });
 };
 
 export const symbol = async ({ address }: Pick<Token, 'address'>): Promise<string> => {
