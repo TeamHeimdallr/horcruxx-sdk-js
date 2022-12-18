@@ -1,6 +1,6 @@
 import { AbiItem } from 'web3-utils';
 
-import ERC721ABI from '~/abi/erc721.json';
+import ERC721ABI_SBT from '~/abi/erc721-sbt.json';
 import { web3 } from '~/config';
 
 export interface SafeTransferFromParmas {
@@ -17,7 +17,7 @@ export const safeTransferFrom = async ({
   collectionAddress,
   data,
 }: SafeTransferFromParmas): Promise<void> => {
-  const contract = new web3.eth.Contract(ERC721ABI as AbiItem[], collectionAddress);
+  const contract = new web3.eth.Contract(ERC721ABI_SBT as AbiItem[], collectionAddress);
 
   await contract.methods.safeTransferFrom(from, to, tokenId, data).call();
 };
@@ -29,7 +29,7 @@ export interface TransferFromParmas {
   tokenId: string;
 }
 export const transferFrom = async ({ from, to, tokenId, collectionAddress }: TransferFromParmas): Promise<void> => {
-  const contract = new web3.eth.Contract(ERC721ABI as AbiItem[], collectionAddress);
+  const contract = new web3.eth.Contract(ERC721ABI_SBT as AbiItem[], collectionAddress);
 
   await contract.methods.transferFrom(from, to, tokenId).call();
 };

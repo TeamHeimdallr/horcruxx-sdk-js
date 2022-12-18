@@ -11,7 +11,6 @@ export {
   SetApprovelForAllParams,
 } from './methods/approve';
 export { Balance, balanceOf, BalanceOfParams } from './methods/balance';
-export { Owner, ownerOf, OwnerOfParams } from './methods/owner';
 export {
   getName,
   GetNameParams,
@@ -22,5 +21,6 @@ export {
   Name,
   TokenSymbol,
   TokenUri,
-} from './methods/token';
+} from './methods/metadata';
+export { Owner, ownerOf, OwnerOfParams } from './methods/owner';
 export { safeTransferFrom, SafeTransferFromParmas, transferFrom, TransferFromParmas } from './methods/transfer';
