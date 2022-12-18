@@ -1,6 +1,6 @@
 {
   "name": "@horcruxx-org/horcruxx-sdk-js",
-  "version": "0.0.22",
+  "version": "0.0.25",
   "description": "",
   "scripts": {
     "build": "rm -rf dist && yarn run build:rollup",
@@ -14,6 +14,9 @@
     "test:target": "jest --config jest.config.js --testPathPattern --maxWorkers=1 =",
     "test:coverage": "jest --config jest.config.js --maxWorkers=1 --coverage"
   },
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.esm.js",
