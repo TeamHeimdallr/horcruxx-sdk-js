@@ -3,9 +3,7 @@
   "version": "0.0.21",
   "description": "",
   "scripts": {
-    "pub": "yarn run build:copy && cd dist && npm publish && cd ..",
     "build": "rm -rf dist && yarn run build:rollup",
-    "build:copy": "cp package.json .npmrc dist/",
     "build:type": "tsc --emitDeclarationOnly --declaration -p tsconfig.json",
     "build:rollup": "rollup -c ./rollup.config.js --bundleConfigAsCjs",
     "check:lint": "eslint src --ext ts --ext tsx --fix",
@@ -18,19 +16,13 @@
   },
   "exports": {
     ".": {
-      "import": "./sbt/index.esm.js",
-      "require": "./sbt/index.cjs.js",
-      "types": "./sbt/index.d.ts"
-    },
-    "./nft": {
-      "import": "./nft/index.esm.js",
-      "require": "./nft/index.cjs.js",
-      "types": "./nft/index.d.ts"
+      "import": "./index.esm.js",
+      "require": "./index.cjs.js",
+      "types": "./index.d.ts"
     }
   },
   "files": [
-    "nft",
-    "sbt"
+    "dist"
   ],
   "sideEffects": false,
   "repository": "https://github.com/horcruxx-org/horcruxx-sdk-js.git",
