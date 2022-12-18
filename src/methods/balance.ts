@@ -1,11 +1,6 @@
-import { web3 } from '~/config';
+import { SBTContract } from '~/config';
 
-export interface BalanceOfParams {
-  address: string;
-}
-export type Balance = string;
-
-export const balanceOf = async ({ address }: BalanceOfParams): Promise<Balance> => {
-  const res = (await web3.eth.getBalance(address)) as Balance;
-  return res;
+export const balanceOf = async (address: string): Promise<string> => {
+  const balance = (await SBTContract.methods.balanceOf(address).call()) as string;
+  return balance;
 };

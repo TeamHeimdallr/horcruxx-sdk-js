@@ -1,38 +1,26 @@
-import { AbiItem } from 'web3-utils';
+import { SBTContract } from '~/config';
 
-import ERC721ABI_SBT from '~/abi/erc721-sbt.json';
-import { web3 } from '~/config';
-
-export interface NameParams {
-  collectionAddress: string;
-}
-export type Name = string;
-export const name = async ({ collectionAddress }: NameParams): Promise<Name> => {
-  const contract = new web3.eth.Contract(ERC721ABI_SBT as AbiItem[], collectionAddress);
-
-  const name = (await contract.methods.name().call()) as Name;
+export const name = async (): Promise<string> => {
+  const name = (await SBTContract.methods.name().call()) as string;
   return name;
 };
 
-export interface SymbolParams {
-  collectionAddress: string;
-}
-export type TokenSymbol = string;
-export const symbol = async ({ collectionAddress }: SymbolParams): Promise<TokenSymbol> => {
-  const contract = new web3.eth.Contract(ERC721ABI_SBT as AbiItem[], collectionAddress);
+export const owner = async (): Promise<string> => {
+  const owner = (await SBTContract.methods.symbol().call()) as string;
+  return owner;
+};
 
-  const symbol = (await contract.methods.symbol().call()) as TokenSymbol;
+export const originalNFTAddress = async (): Promise<string> => {
+  const address = (await SBTContract.methods.symbol().call()) as string;
+  return address;
+};
+
+export const symbol = async (): Promise<string> => {
+  const symbol = (await SBTContract.methods.symbol().call()) as string;
   return symbol;
 };
 
-export interface TokenUriParams {
-  collectionAddress: string;
-  tokenId: string;
-}
-export type TokenUri = string;
-export const tokenUri = async ({ tokenId, collectionAddress }: TokenUriParams): Promise<TokenUri> => {
-  const contract = new web3.eth.Contract(ERC721ABI_SBT as AbiItem[], collectionAddress);
-
-  const tokenUri = (await contract.methods.tokenUri(tokenId).call()) as TokenUri;
+export const tokenUri = async (tokenId: string): Promise<string> => {
+  const tokenUri = (await SBTContract.methods.tokenUri(tokenId).call()) as string;
   return tokenUri;
 };

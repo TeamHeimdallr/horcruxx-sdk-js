@@ -1,18 +1,6 @@
-import { AbiItem } from 'web3-utils';
+import { SBTContract } from '~/config';
 
-import ERC721ABI_SBT from '~/abi/erc721-sbt.json';
-import { web3 } from '~/config';
-
-export interface OwnerOfParams {
-  tokenId: string;
-  collectionAddress: string;
-}
-
-export type Owner = string;
-
-export const ownerOf = async ({ collectionAddress, tokenId }: OwnerOfParams): Promise<Owner> => {
-  const contract = new web3.eth.Contract(ERC721ABI_SBT as AbiItem[], collectionAddress);
-
-  const owner = (await contract.methods.ownerOf(tokenId).call()) as Owner;
+export const ownerOf = async (tokenId: string): Promise<string> => {
+  const owner = (await SBTContract.methods.ownerOf(tokenId).call()) as string;
   return owner;
 };

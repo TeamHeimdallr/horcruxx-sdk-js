@@ -1,59 +1,29 @@
-import { AbiItem } from 'web3-utils';
+import { SBTContract } from '~/config';
 
-import ERC721ABI_SBT from '~/abi/erc721-sbt.json';
-import { web3 } from '~/config';
+export const getApproved = async (tokenId: string): Promise<string> => {
+  const res = (await SBTContract.methods.getApproved(tokenId).call()) as string;
+  return res;
+};
 
+export interface ApprovedForAllParams {
+  owner: string;
+  operator: string;
+}
+export const isApprovedForAll = async ({ owner, operator }: ApprovedForAllParams): Promise<boolean> => {
+  const res = (await SBTContract.methods.isApprovedForAll(owner, operator).call()) as boolean;
+  return res;
+};
 export interface ApproveParams {
   to: string;
   tokenId: string;
-  collectionAddress: string;
 }
-export const approve = async ({ to, collectionAddress, tokenId }: ApproveParams): Promise<void> => {
-  const contract = new web3.eth.Contract(ERC721ABI_SBT as AbiItem[], collectionAddress);
-
-  await contract.methods.approve(to, tokenId).call();
+export const approve = async ({ to, tokenId }: ApproveParams): Promise<void> => {
+  await SBTContract.methods.approve(to, tokenId).call();
 };
-
-export interface SetApprovelForAllParams {
+export interface SetApprovalForAllParams {
   operator: string;
   approved?: boolean;
-  collectionAddress: string;
 }
-export const setApprovalForAll = async ({
-  operator,
-  approved,
-  collectionAddress,
-}: SetApprovelForAllParams): Promise<void> => {
-  const contract = new web3.eth.Contract(ERC721ABI_SBT as AbiItem[], collectionAddress);
-
-  await contract.methods.setApprovalForAll(operator, approved).call();
-};
-
-export interface GetApprovedParams {
-  tokenId: string;
-  collectionAddress: string;
-}
-export type ApprovedAddress = string;
-export const getApproved = async ({ tokenId, collectionAddress }: GetApprovedParams): Promise<ApprovedAddress> => {
-  const contract = new web3.eth.Contract(ERC721ABI_SBT as AbiItem[], collectionAddress);
-
-  const res = (await contract.methods.getApproved(tokenId).call()) as ApprovedAddress;
-  return res;
-};
-
-export interface IsApprovedForAllParams {
-  owner: string;
-  operator: string;
-  collectionAddress: string;
-}
-export type ApprovedForAll = boolean;
-export const isApprovedForAll = async ({
-  owner,
-  operator,
-  collectionAddress,
-}: IsApprovedForAllParams): Promise<ApprovedForAll> => {
-  const contract = new web3.eth.Contract(ERC721ABI_SBT as AbiItem[], collectionAddress);
-
-  const res = (await contract.methods.isApprovedForAll(owner, operator).call()) as ApprovedForAll;
-  return res;
+export const setApprovalForAll = async ({ operator, approved }: SetApprovalForAllParams): Promise<void> => {
+  await SBTContract.methods.setApprovalForAll(operator, approved).call();
 };
