@@ -1,5 +1,5 @@
-import { AbiItem } from 'web3-utils';
 import { Account, TransactionReceipt } from 'web3-core';
+import { AbiItem } from 'web3-utils';
 
 import ERC721ABI_SBT from '~/abi/erc721-sbt.json';
 import { web3 } from '~/config';

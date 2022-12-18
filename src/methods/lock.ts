@@ -1,6 +1,6 @@
 import { Token } from '~/types';
-import { getContract, signAndSendTx } from '~/utils/contract';
 import { getAccount } from '~/utils/account';
+import { getContract, signAndSendTx } from '~/utils/contract';
 import { verfiyAccount } from '~/utils/errors';
 
 export const locked = async ({ address, tokenId }: Token): Promise<boolean> => {

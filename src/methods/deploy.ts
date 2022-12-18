@@ -1,8 +1,9 @@
-import { Token } from '~/types';
-import { getContract, signAndSendTx } from '~/utils/contract';
 import { SBT_BYTECODE } from '~/config/sbt-bytecode';
+import { Token } from '~/types';
 import { getAccount } from '~/utils/account';
+import { getContract, signAndSendTx } from '~/utils/contract';
 import { verfiyAccount } from '~/utils/errors';
+
 import { setOriginalNFTAddress } from './metadata';
 
 export interface DeploySbtParams extends Pick<Token, 'address'> {
