@@ -1,5 +1,7 @@
 import { Token } from '~/types';
-import { getContract } from '~/utils/contract';
+import { getContract, signAndSendTx } from '~/utils/contract';
+import { verfiyAccount } from '~/utils/errors';
+import { getAccount } from '~/utils/account';
 
 export interface SafeTransferFromParmas extends Token {
   from: string;
@@ -9,7 +11,10 @@ export interface SafeTransferFromParmas extends Token {
 export const safeTransferFrom = async ({ from, to, address, tokenId, data }: SafeTransferFromParmas): Promise<void> => {
   const contract = getContract(address);
 
-  await contract.methods.safeTransferFrom(from, to, tokenId, data).call();
+  const encoded = contract.methods.safeTransferFrom(from, to, tokenId, data).encodeABI();
+
+  verfiyAccount();
+  await signAndSendTx({ to: address, data: encoded, account: getAccount() });
 };
 
 export interface TransferFromParmas extends Token {
@@ -19,11 +24,21 @@ export interface TransferFromParmas extends Token {
 export const transferFrom = async ({ from, to, address, tokenId }: TransferFromParmas): Promise<void> => {
   const contract = getContract(address);
 
-  await contract.methods.transferFrom(from, to, tokenId).call();
+  const encoded = contract.methods.safeTransferFrom(from, to, tokenId).encodeABI();
+
+  verfiyAccount();
+  await signAndSendTx({ to: address, data: encoded, account: getAccount() });
 };
 
-export const transferOwnership = async ({ address }: Pick<Token, 'address'>): Promise<void> => {
+export interface TransferOwnershipParams extends Pick<Token, 'address'> {
+  newOwner: string;
+}
+
+export const transferOwnership = async ({ address, newOwner }: TransferOwnershipParams): Promise<void> => {
   const contract = getContract(address);
 
-  await contract.methods.transferOwnership(address).call();
+  const encoded = contract.methods.transferOwnership(newOwner).encodeABI();
+
+  verfiyAccount();
+  await signAndSendTx({ to: address, data: encoded, account: getAccount() });
 };
