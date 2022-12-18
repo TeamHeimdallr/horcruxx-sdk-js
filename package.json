@@ -1,6 +1,6 @@
 {
   "name": "@horcruxx-org/horcruxx-sdk-js",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "",
   "scripts": {
     "pub": "yarn run build:copy && cd dist && npm publish && cd ..",
