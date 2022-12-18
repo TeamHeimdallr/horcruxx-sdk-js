@@ -1,5 +1,6 @@
 import { Token } from '~/types';
-import { getContract } from '~/utils/contract';
+import { getContract, signAndSendTx } from '~/utils/contract';
+import { getAccount } from '~/utils/account';
 
 export const locked = async ({ address, tokenId }: Token): Promise<boolean> => {
   const contract = getContract(address);
@@ -9,10 +10,20 @@ export const locked = async ({ address, tokenId }: Token): Promise<boolean> => {
 
 export const lock = async ({ address, tokenId }: Token): Promise<void> => {
   const contract = getContract(address);
-  await contract.methods.lock(tokenId).call();
+  const encoded = contract.methods.lock(tokenId).encodeABI();
+
+  if (getAccount() == undefined) {
+    throw new Error('There is no connected account. Please execute `connect()` function first');
+  }
+  await signAndSendTx({ to: address, data: encoded, account: getAccount() });
 };
 
 export const unlock = async ({ address, tokenId }: Token): Promise<void> => {
   const contract = getContract(address);
-  await contract.methods.unlock(tokenId).call();
+  const encoded = contract.methods.unlock(tokenId).encodeABI();
+
+  if (getAccount() == undefined) {
+    throw new Error('There is no connected account. Please execute `connect()` function first');
+  }
+  await signAndSendTx({ to: address, data: encoded, account: getAccount() });
 };
