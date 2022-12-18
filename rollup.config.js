@@ -10,8 +10,6 @@ import sourcemaps from 'rollup-plugin-sourcemaps';
 import dts from 'rollup-plugin-dts';
 import path from 'path';
 
-import pkg from './package.json';
-
 const extensions = ['.js', '.ts'];
 
 const plugins = [
@@ -42,36 +40,34 @@ const external = ['web3'];
 
 export default [
   {
-    input: 'src/index.ts',
+    input: 'src/sbt/index.ts',
     output: [
-      {
-        file: pkg.module,
-        format: 'esm',
-        exports: 'auto',
-        sourcemap: true,
-      },
+      { file: 'dist/sbt/index.esm.js', format: 'esm', exports: 'auto', sourcemap: true },
+      { file: 'dist/sbt/index.cjs.js', format: 'cjs', exports: 'auto', sourcemap: true },
     ],
     external,
     treeshake,
     plugins,
   },
   {
-    input: 'src/index.ts',
+    input: 'src/sbt/index.ts',
+    output: [{ file: 'dist/sbt/index.d.ts', format: 'esm' }],
+    plugins: [dts.default(), alias({ entries: [{ find: '~', replacement: path.resolve(__dirname, 'src') }] })],
+  },
+
+  {
+    input: 'src/nft/index.ts',
     output: [
-      {
-        file: pkg.main,
-        format: 'cjs',
-        exports: 'auto',
-        sourcemap: true,
-      },
+      { file: 'dist/nft/index.esm.js', format: 'esm', exports: 'auto', sourcemap: true },
+      { file: 'dist/nft/index.cjs.js', format: 'cjs', exports: 'auto', sourcemap: true },
     ],
     external,
     treeshake,
     plugins,
   },
   {
-    input: 'src/index.ts',
-    output: [{ file: 'dist/index.d.ts', format: 'esm' }],
+    input: 'src/nft/index.ts',
+    output: [{ file: 'dist/nft/index.d.ts', format: 'esm' }],
     plugins: [dts.default(), alias({ entries: [{ find: '~', replacement: path.resolve(__dirname, 'src') }] })],
   },
 ];
