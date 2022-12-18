@@ -1,5 +1,7 @@
 import { Token } from '~/types';
-import { getContract } from '~/utils/contract';
+import { getContract, signAndSendTx } from '~/utils/contract';
+import { getAccount } from '~/utils/account';
+import { verfiyAccount } from '~/utils/errors';
 
 export const locked = async ({ address, tokenId }: Token): Promise<boolean> => {
   const contract = getContract(address);
@@ -9,10 +11,16 @@ export const locked = async ({ address, tokenId }: Token): Promise<boolean> => {
 
 export const lock = async ({ address, tokenId }: Token): Promise<void> => {
   const contract = getContract(address);
-  await contract.methods.lock(tokenId).call();
+  const encoded = contract.methods.lock(tokenId).encodeABI();
+
+  verfiyAccount();
+  await signAndSendTx({ to: address, data: encoded, account: getAccount() });
 };
 
 export const unlock = async ({ address, tokenId }: Token): Promise<void> => {
   const contract = getContract(address);
-  await contract.methods.unlock(tokenId).call();
+  const encoded = contract.methods.unlock(tokenId).encodeABI();
+
+  verfiyAccount();
+  await signAndSendTx({ to: address, data: encoded, account: getAccount() });
 };
