@@ -1,9 +1,13 @@
 import { Token } from '~/types';
 import { getContract } from '~/utils/contract';
 
-export const balanceOf = async ({ address }: Pick<Token, 'address'>): Promise<string> => {
+export interface BalanceOfParams extends Pick<Token, 'address'> {
+  holderAddress: string;
+}
+
+export const balanceOf = async ({ address, holderAddress }: BalanceOfParams): Promise<string> => {
   const contract = getContract(address);
 
-  const balance = (await contract.methods.balanceOf(address).call()) as string;
+  const balance = (await contract.methods.balanceOf(holderAddress).call()) as string;
   return balance;
 };
