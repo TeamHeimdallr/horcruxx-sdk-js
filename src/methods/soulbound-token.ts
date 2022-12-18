@@ -5,8 +5,8 @@ import { web3 } from '~/config';
 import { CONTRACT_TYPE } from '~/types';
 
 export interface SBTMetadataParams {
-  collectionAddress: string; // The address of the SBT contract
-  tokenId: string; // The ID of the token
+  collectionAddress: string;
+  tokenId: string;
 }
 
 export interface SBTMetadata {
@@ -45,7 +45,7 @@ export const getSBTMetadata = async ({ collectionAddress, tokenId }: SBTMetadata
 };
 
 export interface SBTCollectionMetadataParams {
-  collectionAddress: string; // The address of the SBT contract
+  collectionAddress: string;
 }
 
 export interface SBTCollectionMetadata {
@@ -68,8 +68,8 @@ export const getSBTCollectionMetadata = async (params: SBTCollectionMetadataPara
   };
 };
 export interface SBTAttributesParams {
-  collectionAddress: string; // The address of the SBT contract
-  tokenId: string; // The ID of the token
+  collectionAddress: string;
+  tokenId: string;
 }
 
 export interface SBTAttribute {
@@ -149,7 +149,7 @@ export const getCollectStats = async (params: CollectStatsParams): Promise<Colle
 };
 
 export interface SBTAddressByNFTParams {
-  collectionAddress: string; // The address of the SBT contract
+  collectionAddress: string;
 }
 
 export interface SBTAddressByNFT {
@@ -181,15 +181,10 @@ export const getNFTAddressBySBT = async (params: NFTAddressBySBTParams): Promise
 };
 
 export interface BurnerAddressParams {
-  collectionAddress: string; // sbt address
+  collectionAddress: string;
 }
 
-export interface BurnerAddress {
-  burnerAddress: string;
-}
-
+export type BurnerAddress = string;
 export const getBurnerAddress = async (params: BurnerAddressParams): Promise<BurnerAddress> => {
-  return {
-    burnerAddress: '0x000000000000000000000000000000000000dead',
-  };
+  return '0x000000000000000000000000000000000000dead';
 };
