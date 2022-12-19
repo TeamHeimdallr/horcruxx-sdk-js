@@ -1,7 +1,5 @@
 import { Token } from '~/types';
-import { getAccount } from '~/utils/account';
 import { getContract, signAndSendTx } from '~/utils/contract';
-import { verfiyAccount } from '~/utils/errors';
 
 export const getApproved = async ({ address, tokenId }: Token): Promise<string> => {
   const contract = getContract(address);
@@ -30,8 +28,7 @@ export const approve = async ({ to, tokenId, address }: ApproveParams): Promise<
 
   const encoded = contract.methods.approve(to, tokenId).encodeABI();
 
-  verfiyAccount();
-  await signAndSendTx({ to: address, data: encoded, account: getAccount() });
+  await signAndSendTx({ to: address, data: encoded });
 };
 
 export interface SetApprovalForAllParams extends Pick<Token, 'address'> {
@@ -43,6 +40,5 @@ export const setApprovalForAll = async ({ operator, approved, address }: SetAppr
 
   const encoded = contract.methods.setApprovalForAll(operator, approved).encodeABI();
 
-  verfiyAccount();
-  await signAndSendTx({ to: address, data: encoded, account: getAccount() });
+  await signAndSendTx({ to: address, data: encoded });
 };

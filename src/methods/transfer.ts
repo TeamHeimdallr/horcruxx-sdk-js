@@ -1,7 +1,6 @@
 import { Token } from '~/types';
 import { getAccount } from '~/utils/account';
 import { getContract, signAndSendTx } from '~/utils/contract';
-import { verfiyAccount } from '~/utils/errors';
 
 export interface SafeTransferFromParmas extends Token {
   from: string;
@@ -13,8 +12,7 @@ export const safeTransferFrom = async ({ from, to, address, tokenId, data }: Saf
 
   const encoded = contract.methods.safeTransferFrom(from, to, tokenId, data).encodeABI();
 
-  verfiyAccount();
-  await signAndSendTx({ to: address, data: encoded, account: getAccount() });
+  await signAndSendTx({ to: address, data: encoded });
 };
 
 export interface TransferFromParmas extends Token {
@@ -26,8 +24,7 @@ export const transferFrom = async ({ from, to, address, tokenId }: TransferFromP
 
   const encoded = contract.methods.safeTransferFrom(from, to, tokenId).encodeABI();
 
-  verfiyAccount();
-  await signAndSendTx({ to: address, data: encoded, account: getAccount() });
+  await signAndSendTx({ to: address, data: encoded });
 };
 
 export interface TransferOwnershipParams extends Pick<Token, 'address'> {
@@ -39,6 +36,5 @@ export const transferOwnership = async ({ address, newOwner }: TransferOwnership
 
   const encoded = contract.methods.transferOwnership(newOwner).encodeABI();
 
-  verfiyAccount();
-  await signAndSendTx({ to: address, data: encoded, account: getAccount() });
+  await signAndSendTx({ to: address, data: encoded });
 };
