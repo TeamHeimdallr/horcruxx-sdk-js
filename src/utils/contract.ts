@@ -35,10 +35,8 @@ export const signAndSendTx = async ({ to, data, gas }: SignAndSendTxParams): Pro
   const account = getAccount();
   if (account == undefined && (typeof window.ethereum !== 'undefined' || typeof window.web3 !== 'undefined')) {
     const ethAccounts = await web3.eth.requestAccounts();
-
-    console.log(ethAccounts);
-    let signedTx = await web3.eth.signTransaction({ ...tx, from: ethAccounts[0] }, ethAccounts[0]);
-    return web3.eth.sendSignedTransaction(signedTx.raw).on('error', console.error);
+    console.log(ethAccounts[0]);
+    return web3.eth.sendTransaction({ ...tx, from: ethAccounts[0] }).on('error', console.error);
   } else {
     let signedTx = await web3.eth.accounts.signTransaction(tx, account.privateKey);
     return web3.eth.sendSignedTransaction(signedTx.rawTransaction).on('error', console.error);
